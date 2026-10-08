@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Restaurants
+{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Restaurants</h1>
+
+        {% if restaurants is empty %}
+            <p>Aucun restaurant enregistré.</p>
+        {% else %}
+            <table>
+                <caption>Restaurants enregistrés</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for restaurant in restaurants %}
+                        <tr>
+                            <td>{{ restaurant.nom }}</td>
+                            <td>{{ restaurant.description }}</td>
+                            <td>{{ restaurant.rating }}/5</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

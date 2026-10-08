@@ -73,7 +73,7 @@ final class BddController extends AbstractController
     {
         $restaurant = new Restaurant();
         $restaurant->setnom('La pizza de la mama !');
-        $restaurant->setDescription('');
+        $restaurant->setDescription('Très bon');
         $em->persist($restaurant);
         $em->flush();
         return $this->render('bdd/index.html.twig', [
@@ -92,10 +92,18 @@ final class BddController extends AbstractController
     }
 
     #[Route('/supprimer_restaurant/{id}', name: 'app_supprimer_restaurant')]
-    public function supprimer_restaurant(Article $article, EntityManagerInterface $em): Response
+    public function supprimer_restaurant(Restaurant $restaurant, EntityManagerInterface $em): Response
     {
-        $em->remove($article);
+        $em->remove($restaurant);
         $em->flush();
         return new Response('element avec id supprimer');
+    }
+
+    #[Route('/Restaurant', name: 'app_restaurant', methods: ['GET'])]
+    public function list_restaurants(RestaurantRepository $restaurantRepository): Response
+    {
+        return $this->render('restaurant/list.html.twig', [
+            'restaurants' => $restaurantRepository->findBy([], ['nom' => 'ASC']),
+        ]);
     }
 }

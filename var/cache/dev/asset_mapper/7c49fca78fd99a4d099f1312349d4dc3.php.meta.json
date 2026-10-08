@@ -1,0 +1,1 @@
+{"resources":[{"@type":"Symfony\\Component\\Config\\Resource\\FileResource","resource":"/home/gireg/php_symfony/vendor/symfony/ux-turbo/assets/dist/mercure_stream_source_element.js"},{"@type":"Symfony\\Component\\Config\\Resource\\FileExistenceResource","resource":"/home/gireg/php_symfony/assets/vendor/@hotwired/turbo/turbo.index.js","exists":true}]}
