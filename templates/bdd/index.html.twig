@@ -14,10 +14,12 @@
         <h1>Hello {{ controller_name }}! ✅</h1>
 
         This friendly message is coming from:
-        {{form_start(form)}}
-        {{form_widget(form)}}
-        <button type="submit">create article</button>
-        {{form_end(form)}}
+        {% if form is defined %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">create article</button>
+            {{ form_end(form) }}
+        {% endif %}
 
     </div>
 {% endblock %}
