@@ -352,3 +352,12 @@ a2d2ea,127.0.0.1,GET,http://127.0.0.1:8000/restaurant,1791446938,,404,request
 7643f8,127.0.0.1,GET,http://127.0.0.1:8000/Restaurant,1791446974,,200,request
 c5b481,127.0.0.1,GET,http://127.0.0.1:8000/create_restaurant,1791447181,,200,request
 d60f4d,127.0.0.1,GET,http://127.0.0.1:8000/Restaurant,1791447185,,200,request
+6a9805,127.0.0.1,GET,http://127.0.0.1:8000/Restaurant,1791451668,,200,request
+473685,127.0.0.1,GET,http://127.0.0.1:8000/create,1791452327,,200,request
+5af758,127.0.0.1,GET,http://127.0.0.1:8000/create_commentaire,1791452329,b6fdfa,500,request
+b6fdfa,127.0.0.1,GET,http://127.0.0.1:8000/create_commentaire,1791452329,,500,request
+c7337e,127.0.0.1,GET,http://127.0.0.1:8000/create_commentaire,1791453601,fd6a26,500,request
+fd6a26,127.0.0.1,GET,http://127.0.0.1:8000/create_commentaire,1791453601,,500,request
+5fd1bc,127.0.0.1,GET,http://127.0.0.1:8000/registration,1791455874,288c5d,404,request
+288c5d,127.0.0.1,GET,http://127.0.0.1:8000/registration,1791455874,,404,request
+020949,127.0.0.1,GET,http://127.0.0.1:8000/register,1791456064,,200,request

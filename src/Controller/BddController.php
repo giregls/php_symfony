@@ -106,4 +106,27 @@ final class BddController extends AbstractController
             'restaurants' => $restaurantRepository->findBy([], ['nom' => 'ASC']),
         ]);
     }
+
+    // --------------------------------------------------------------------------------------------------------------------
+
+    #[Route('/create_commentaire', name: 'create_commentaire_bdd')]
+    public function create_commentaire(EntityManagerInterface $em): Response
+    {
+        $commentaire = new Commentaire();
+        $commentaire->setcontenue('très bonne pizza');
+        $commentaire->setrating(3.5);
+        $em->persist($commentaire);
+        $em->flush();
+        return $this->render('bdd/index.html.twig', [
+            'controller_name' => 'BddController',
+        ]);
+    }
+
+    #[Route('/Register', name: 'app_register', methods: ['GET'])]
+    public function register(RegisterRepository $registerRepository): Response
+    {
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $registerRepository->findBy([], ['nom' => 'ASC']),
+        ]);
+    }
 }

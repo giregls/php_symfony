@@ -14,7 +14,7 @@ class Commentaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(name: 'contenu', type: Types::TEXT)]
     private ?string $commentaire = null;
 
     public function getId(): ?int

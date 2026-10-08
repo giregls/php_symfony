@@ -19,7 +19,7 @@ class Restaurant
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $rating = null;
 
     public function getId(): ?int
@@ -56,7 +56,7 @@ class Restaurant
         return $this->rating;
     }
 
-    public function setRating(int $rating): static
+    public function setRating(?int $rating): static
     {
         $this->rating = $rating;
 

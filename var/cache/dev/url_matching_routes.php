@@ -19,7 +19,11 @@ return [
         '/Article' => [[['_route' => 'app_article', '_controller' => 'App\\Controller\\BddController::show_article'], null, null, null, false, false, null]],
         '/create_restaurant' => [[['_route' => 'create_restaurant_bdd', '_controller' => 'App\\Controller\\BddController::create_restaurant'], null, null, null, false, false, null]],
         '/Restaurant' => [[['_route' => 'app_restaurant', '_controller' => 'App\\Controller\\BddController::list_restaurants'], null, ['GET' => 0], null, false, false, null]],
+        '/create_commentaire' => [[['_route' => 'create_commentaire_bdd', '_controller' => 'App\\Controller\\BddController::create_commentaire'], null, null, null, false, false, null]],
         '/age' => [[['_route' => 'age', '_controller' => 'App\\Controller\\HellcontrollerController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
+        '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
