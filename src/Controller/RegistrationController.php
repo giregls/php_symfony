@@ -29,6 +29,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Compte créé. Vous pouvez vous connecter.');
 
             // do anything else you need here, like send an email
 

@@ -7,9 +7,26 @@
 {% block body %}
     <main>
         <h1>Restaurants</h1>
+        <p>
+            {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('restaurant_add') }}">Ajouter un restaurant</a>
+                <a href="{{ path('ville_add') }}">Ajouter une ville</a>
+            {% endif %}
+        </p>
+
+        <form method="get" action="{{ path('restaurant_list') }}">
+            <label for="ville">Filtrer par ville</label>
+            <select id="ville" name="ville">
+                <option value="">Toutes les villes</option>
+                {% for currentVille in villes %}
+                    <option value="{{ currentVille.id }}"{% if ville and ville.id == currentVille.id %} selected{% endif %}>{{ currentVille.nom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrer</button>
+        </form>
 
         {% if restaurants is empty %}
-            <p>Aucun restaurant enregistré.</p>
+            <p>Aucun restaurant trouvé.</p>
         {% else %}
             <table>
                 <caption>Restaurants enregistrés</caption>
@@ -18,14 +35,34 @@
                         <th scope="col">Nom</th>
                         <th scope="col">Description</th>
                         <th scope="col">Note</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for restaurant in restaurants %}
                         <tr>
-                            <td>{{ restaurant.nom }}</td>
+                            <td><a href="{{ path('restaurant_show', {id: restaurant.id}) }}">{{ restaurant.nom }}</a></td>
                             <td>{{ restaurant.description }}</td>
-                            <td>{{ restaurant.rating }}/5</td>
+                            <td>{{ restaurant.rating is not null ? restaurant.rating ~ '/5' : 'Non noté' }}</td>
+                            <td>
+                                {% if restaurant.ville %}
+                                    <a href="{{ path('ville_restaurants', {id: restaurant.ville.id}) }}">{{ restaurant.ville.nom }}</a>
+                                {% else %}
+                                    Non renseignée
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if is_granted('ROLE_USER') %}
+                                    <a href="{{ path('restaurant_edit', {id: restaurant.id}) }}">Modifier</a>
+                                {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <form method="post" action="{{ path('restaurant_delete', {id: restaurant.id}) }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_restaurant_' ~ restaurant.id) }}">
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

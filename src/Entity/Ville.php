@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VilleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VilleRepository::class)]
@@ -18,6 +20,14 @@ class Ville
 
     #[ORM\Column(length: 255)]
     private ?string $pays = null;
+
+    #[ORM\OneToMany(targetEntity: Restaurant::class, mappedBy: 'ville')]
+    private Collection $restaurants;
+
+    public function __construct()
+    {
+        $this->restaurants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -46,5 +56,10 @@ class Ville
         $this->pays = $pays;
 
         return $this;
+    }
+
+    public function getRestaurants(): Collection
+    {
+        return $this->restaurants;
     }
 }

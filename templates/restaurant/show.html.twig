@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ restaurant.nom }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ restaurant.nom }}</h1>
+    <p>Description : {{ restaurant.description }}</p>
+    <p>Note : {{ restaurant.rating is not null ? restaurant.rating ~ '/5' : 'Non noté' }}</p>
+    <p>
+        Ville :
+        {% if restaurant.ville %}
+            <a href="{{ path('ville_restaurants', {id: restaurant.ville.id}) }}">{{ restaurant.ville.nom }}, {{ restaurant.ville.pays }}</a>
+        {% else %}
+            Non renseignée
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="{{ path('restaurant_list') }}">Retour à la liste</a>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('restaurant_edit', {id: restaurant.id}) }}">Modifier</a>
+            <a href="{{ path('comment_add', {id: restaurant.id}) }}">Ajouter un commentaire</a>
+        {% endif %}
+    </p>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <form method="post" action="{{ path('restaurant_delete', {id: restaurant.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete_restaurant_' ~ restaurant.id) }}">
+            <button type="submit">Supprimer le restaurant</button>
+        </form>
+    {% endif %}
+
+    <h2>Commentaires</h2>
+    {% if restaurant.commentaires is empty %}
+        <p>Aucun commentaire.</p>
+    {% else %}
+        <ul>
+            {% for commentaire in restaurant.commentaires %}
+                <li>
+                    <p>{{ commentaire.contenu }}</p>
+                    <p>Note : {{ commentaire.rating is not null ? commentaire.rating ~ '/5' : 'Non noté' }}</p>
+                    <p>Date : {{ commentaire.dateCreation ? commentaire.dateCreation|date('Y-m-d H:i') : 'Non renseignée' }}</p>
+                    <p>Auteur : {{ commentaire.auteur ? commentaire.auteur.email : 'Inconnu' }}</p>
+                    {% if is_granted('ROLE_ADMIN') or (app.user and commentaire.auteur and app.user.id == commentaire.auteur.id) %}
+                        <form method="post" action="{{ path('comment_delete', {id: commentaire.id}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_comment_' ~ commentaire.id) }}">
+                            <button type="submit">Supprimer le commentaire</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

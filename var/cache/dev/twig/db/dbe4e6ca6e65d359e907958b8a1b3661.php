@@ -75,7 +75,9 @@ class __TwigTemplate_150da30c2e0f97684254eb83afe24fde extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Ajouter un restaurant | La Table";
+        // line 4
+        yield "    Ajouter un restaurant
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -85,7 +87,7 @@ class __TwigTemplate_150da30c2e0f97684254eb83afe24fde extends Template
         return; yield;
     }
 
-    // line 5
+    // line 7
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -98,22 +100,25 @@ class __TwigTemplate_150da30c2e0f97684254eb83afe24fde extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
-        yield "    <p class=\"eyebrow\"><a href=\"";
+        // line 8
+        yield "    <h1>Ajouter un restaurant</h1>
+    ";
+        // line 9
+        yield (string)         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'form_start');
+        yield "
+    ";
+        // line 10
+        yield (string) $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), 'widget');
+        yield "
+    <button type=\"submit\">Enregistrer</button>
+    ";
+        // line 12
+        yield (string)         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), 'form_end');
+        yield "
+    <a href=\"";
+        // line 13
         yield (string) $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("restaurant_list");
-        yield "\">Restaurants</a> / Nouveau</p>
-    <section class=\"form-panel\">
-        <div class=\"page-heading\">
-            <div>
-                <p class=\"eyebrow\">Nouvelle adresse</p>
-                <h1>Ajouter un restaurant</h1>
-            </div>
-        </div>
-        ";
-        // line 14
-        yield from $this->load("restaurant/_form.html.twig", 14)->unwrap()->yield(CoreExtension::merge($context, ["button_label" => "Créer le restaurant"]));
-        // line 15
-        yield "    </section>
+        yield "\">Annuler</a>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -153,26 +158,24 @@ class __TwigTemplate_150da30c2e0f97684254eb83afe24fde extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  116 => 15,  114 => 14,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
+        return array (  120 => 13,  116 => 12,  111 => 10,  107 => 9,  104 => 8,  91 => 7,  79 => 4,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends \x27base.html.twig\x27 %}
 
-{% block title %}Ajouter un restaurant | La Table{% endblock %}
+{% block title %}
+    Ajouter un restaurant
+{% endblock %}
 
 {% block body %}
-    <p class=\"eyebrow\"><a href=\"{{ path(\x27restaurant_list\x27) }}\">Restaurants</a> / Nouveau</p>
-    <section class=\"form-panel\">
-        <div class=\"page-heading\">
-            <div>
-                <p class=\"eyebrow\">Nouvelle adresse</p>
-                <h1>Ajouter un restaurant</h1>
-            </div>
-        </div>
-        {% include \x27restaurant/_form.html.twig\x27 with {button_label: \x27Créer le restaurant\x27} %}
-    </section>
+    <h1>Ajouter un restaurant</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type=\"submit\">Enregistrer</button>
+    {{ form_end(form) }}
+    <a href=\"{{ path(\x27restaurant_list\x27) }}\">Annuler</a>
 {% endblock %}
 ", "restaurant/add.html.twig", "/home/gireg/php_symfony/templates/restaurant/add.html.twig");
     }

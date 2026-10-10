@@ -22,6 +22,9 @@ return [
         '/create_commentaire' => [[['_route' => 'create_commentaire_bdd', '_controller' => 'App\\Controller\\BddController::create_commentaire'], null, null, null, false, false, null]],
         '/age' => [[['_route' => 'age', '_controller' => 'App\\Controller\\HellcontrollerController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
+        '/restaurants' => [[['_route' => 'restaurant_list', '_controller' => 'App\\Controller\\RestaurantController::list'], null, ['GET' => 0], null, false, false, null]],
+        '/restaurants/ajouter' => [[['_route' => 'restaurant_add', '_controller' => 'App\\Controller\\RestaurantController::add'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/villes/ajouter' => [[['_route' => 'ville_add', '_controller' => 'App\\Controller\\RestaurantController::addCity'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
     ],
@@ -53,6 +56,14 @@ return [
                     .'|/([^/]++)(*:282)'
                     .'|_restaurant/([^/]++)(*:310)'
                 .')'
+                .'|/restaurants/(?'
+                    .'|(\\d+)(*:340)'
+                    .'|(\\d+)/modifier(*:362)'
+                    .'|(\\d+)/supprimer(*:385)'
+                    .'|(\\d+)/commentaires/ajouter(*:419)'
+                .')'
+                .'|/commentaires/(\\d+)/supprimer(*:457)'
+                .'|/villes/(\\d+)/restaurants(*:490)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -67,8 +78,14 @@ return [
         223 => [[['_route' => 'app_modifier', '_controller' => 'App\\Controller\\BddController::modifier_article'], ['id'], null, null, false, true, null]],
         251 => [[['_route' => 'app_modifier_restaurant', '_controller' => 'App\\Controller\\BddController::modifier_restaurant'], ['id'], null, null, false, true, null]],
         282 => [[['_route' => 'app_supprimer', '_controller' => 'App\\Controller\\BddController::supprimer_article'], ['id'], null, null, false, true, null]],
-        310 => [
-            [['_route' => 'app_supprimer_restaurant', '_controller' => 'App\\Controller\\BddController::supprimer_restaurant'], ['id'], null, null, false, true, null],
+        310 => [[['_route' => 'app_supprimer_restaurant', '_controller' => 'App\\Controller\\BddController::supprimer_restaurant'], ['id'], null, null, false, true, null]],
+        340 => [[['_route' => 'restaurant_show', '_controller' => 'App\\Controller\\RestaurantController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        362 => [[['_route' => 'restaurant_edit', '_controller' => 'App\\Controller\\RestaurantController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        385 => [[['_route' => 'restaurant_delete', '_controller' => 'App\\Controller\\RestaurantController::delete'], ['id'], ['POST' => 0], null, false, false, null]],
+        419 => [[['_route' => 'comment_add', '_controller' => 'App\\Controller\\RestaurantController::addComment'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        457 => [[['_route' => 'comment_delete', '_controller' => 'App\\Controller\\RestaurantController::deleteComment'], ['id'], ['POST' => 0], null, false, false, null]],
+        490 => [
+            [['_route' => 'ville_restaurants', '_controller' => 'App\\Controller\\RestaurantController::restaurantsByCity'], ['id'], ['GET' => 0], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

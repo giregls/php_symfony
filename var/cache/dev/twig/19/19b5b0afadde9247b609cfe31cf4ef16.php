@@ -91,10 +91,55 @@ class __TwigTemplate_67257ef2e4f07d897aaae11c27358f44 extends Template
         // line 22
         yield "    </head>
     <body>
-        ";
-        // line 24
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        <nav>
+            <a href=\"";
+        // line 25
+        yield (string) $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("restaurant_list");
+        yield "\">Restaurants</a>
+            ";
         // line 26
+        if ((($tmp = CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 26, $this->source); })()), "user", [], "any", false, false, false, 26)) && $tmp instanceof Markup ? (string) $tmp : $tmp)) {
+            // line 27
+            yield "                <span>";
+            yield (string) $this->escaper->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 27, $this->source); })()), "user", [], "any", false, false, false, 27), "userIdentifier", [], "any", false, false, false, 27), "html", null, true);
+            yield "</span>
+                <a href=\"";
+            // line 28
+            yield (string) $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+            yield "\">Logout</a>
+            ";
+        } else {
+            // line 30
+            yield "                <a href=\"";
+            yield (string) $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+            yield "\">Connexion</a>
+                <a href=\"";
+            // line 31
+            yield (string) $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+            yield "\">Inscription</a>
+            ";
+        }
+        // line 33
+        yield "        </nav>
+        ";
+        // line 34
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", ["success"], "method", false, false, false, 34));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 35
+            yield "            <p>";
+            yield (string) $this->escaper->escape($context["message"], "html", null, true);
+            yield "</p>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent);
+        $context += $_parent;
+        // line 37
+        yield "        ";
+        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
+        // line 39
         yield "    </body>
 </html>";
         
@@ -207,7 +252,7 @@ class __TwigTemplate_67257ef2e4f07d897aaae11c27358f44 extends Template
         return; yield;
     }
 
-    // line 24
+    // line 37
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -220,7 +265,7 @@ class __TwigTemplate_67257ef2e4f07d897aaae11c27358f44 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 25
+        // line 38
         yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -260,7 +305,7 @@ class __TwigTemplate_67257ef2e4f07d897aaae11c27358f44 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  224 => 25,  211 => 24,  197 => 12,  184 => 11,  173 => 14,  170 => 11,  157 => 10,  146 => 8,  133 => 7,  110 => 5,  98 => 26,  96 => 24,  92 => 22,  84 => 18,  81 => 17,  79 => 16,  76 => 15,  74 => 10,  71 => 9,  69 => 7,  64 => 5,  58 => 1,);
+        return array (  269 => 38,  256 => 37,  242 => 12,  229 => 11,  218 => 14,  215 => 11,  202 => 10,  191 => 8,  178 => 7,  155 => 5,  143 => 39,  140 => 37,  130 => 35,  126 => 34,  123 => 33,  118 => 31,  113 => 30,  108 => 28,  103 => 27,  101 => 26,  97 => 25,  92 => 22,  84 => 18,  81 => 17,  79 => 16,  76 => 15,  74 => 10,  71 => 9,  69 => 7,  64 => 5,  58 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -288,6 +333,19 @@ class __TwigTemplate_67257ef2e4f07d897aaae11c27358f44 extends Template
         {% endif %}
     </head>
     <body>
+        <nav>
+            <a href=\"{{ path(\x27restaurant_list\x27) }}\">Restaurants</a>
+            {% if app.user %}
+                <span>{{ app.user.userIdentifier }}</span>
+                <a href=\"{{ path(\x27app_logout\x27) }}\">Logout</a>
+            {% else %}
+                <a href=\"{{ path(\x27app_login\x27) }}\">Connexion</a>
+                <a href=\"{{ path(\x27app_register\x27) }}\">Inscription</a>
+            {% endif %}
+        </nav>
+        {% for message in app.flashes(\x27success\x27) %}
+            <p>{{ message }}</p>
+        {% endfor %}
         {% block body %}
         {% endblock %}
     </body>

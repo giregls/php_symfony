@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use APP\EntityArticle;
 use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
-use App\Repository\RestaurantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class BddController extends AbstractController
@@ -100,11 +99,9 @@ final class BddController extends AbstractController
     }
 
     #[Route('/Restaurant', name: 'app_restaurant', methods: ['GET'])]
-    public function list_restaurants(RestaurantRepository $restaurantRepository): Response
+    public function list_restaurants(): Response
     {
-        return $this->render('restaurant/list.html.twig', [
-            'restaurants' => $restaurantRepository->findBy([], ['nom' => 'ASC']),
-        ]);
+        return $this->redirectToRoute('restaurant_list');
     }
 
     // --------------------------------------------------------------------------------------------------------------------
@@ -128,5 +125,11 @@ final class BddController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $registerRepository->findBy([], ['nom' => 'ASC']),
         ]);
+    }
+
+    #[Route('/Login', name: 'app_login', methods: ['GET'])]
+    public function login(): Response
+    {
+        return $this->render('registration/login.html.twig');
     }
 }
